@@ -13,13 +13,16 @@ const mongoose = require('mongoose'); // 0 - import mongoose
 // mongoose config
 mongoose.connect('mongodb://localhost:27017/Books', {useNewUrlParser: true, useUnifiedTopology: true}); // 1 - connect mongoose with DB (books)
 
-const Bookschema = new mongoose.Schema({ //define the schema (structure)
-  title: String,
-  description: String,
-  status: String
+let Bookmodel = require('./schema');  //file do //define the schema (structure) &compile the schem into a model
 
-});
-const Bookmodel = mongoose.model('book', Bookschema); //compile the schem into a model
+
+// const Bookschema = new mongoose.Schema({ //define the schema (structure)
+//   title: String,
+//   description: String,
+//   status: String
+
+// });
+// const Bookmodel = mongoose.model('book', Bookschema); //compile the schem into a model
 
 
 //seed data (insert initial data)
@@ -56,11 +59,9 @@ app.get('/test', (request, response) => {
   response.send('test request received')
 
 })
-// http://localhost:3001/getbooks
+// http://localhost:3001/books
 
-app.get('/getbooks',getbooksHandler);
-
-function getbooksHandler(req,res) {
+let getbooksHandler = (req,res) =>{
 
   Bookmodel.find({},(err,result)=>{
     if(err)
@@ -75,5 +76,6 @@ function getbooksHandler(req,res) {
   })
 }
 
+app.get('/books',getbooksHandler);
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));

@@ -8,28 +8,40 @@
 <!-- Provide a high level overview of what this application is and why you are building it, beyond the fact that it's an assignment for this class. (i.e. What's your problem domain?) -->
 
 ## Getting Started
+
+**Backend side**
+
 1- add mongoose to my server  [source!](https://mongoosejs.com/docs/)
- * npm i mongoos --save
+ * npm i mongoose --save
+
+ 2- creat schema &model in other file then requiring in app.js
+
+ 3-seed your database "insert initial data "
+
+ 4- creat books route to get the request and send the response to the user "front end"
+
+
+
 
 ## Architecture
-<!-- Provide a detailed description of the application design. What technologies (languages, libraries, etc) you're using, and any other relevant design information. -->
+![Working Flow](./lab.png)
 
 ## Change Log
-<!-- Use this area to document the iterative changes made to your application as each feature is successfully implemented. Use time stamps. Here's an example:
-
-01-01-2001 4:59pm - Application now has a fully-functional express server, with a GET route for the location resource. -->
+4/9/2022 lab 11 :
+the application have mongo data base with initial data.
 
 ## Estimates
 <!-- See below -->
 
 ## Credit and Collaborations
-<!-- Give credit (and a link) to other people or resources that helped you build this application. -->
+my partner is Amani ALZoubi , we build the workflow
 
 
 
-lab 11 at 4/9/2022
+
 ## Time Estimates
 
+**lab 11 at 4/9/2022**
 
 Name of feature: READ of CRUD
 
@@ -37,6 +49,6 @@ Estimate of time needed to complete: 5hours
 
 Start time: 3.00pm sunday
 
-Finish time: _____
+Finish time: 1.51 am monday
 
-Actual time needed to complete: _____
+Actual time needed to complete: 8 hours
