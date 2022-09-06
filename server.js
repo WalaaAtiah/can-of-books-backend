@@ -12,7 +12,7 @@ const mongoose = require('mongoose'); // 0 - import mongoose
 
 // mongoose config
 mongoose.connect(`${process.env.url}`, {useNewUrlParser: true, useUnifiedTopology: true}); // 1 - connect mongoose with DB (books)
-
+// console.log(process.env.url)
 let Bookmodel = require('./schema');  //file do //define the schema (structure) &compile the schem into a model
 
 // access req.body
@@ -56,7 +56,6 @@ app.get('/test', (request, response) => {
 // http://localhost:3001/books
 
 let getbooksHandler = (req,res) =>{
-
   Bookmodel.find({},(err,result)=>{
     if(err)
     {
@@ -91,10 +90,29 @@ async function addbookHandler(req,res) {
       }
   })
 }
+function deleteBookHandler(req,res){
+  const bookId = req.params.id;
+  console.log("inside delete",bookId)
+    Bookmodel.deleteOne({_id:bookId},(err,result)=>{
+        
+        Bookmodel.find({},(err,result)=>{
+            if(err)
+            {
+                console.log(err);
+            }
+            else
+            {
+                // console.log(result);
+                res.send(result);
+            }
+        })
 
+    })
+}
 
 app.get('/books',getbooksHandler);
 app.post('/books',addbookHandler);
+app.delete('/books/:id',deleteBookHandler);
 
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
