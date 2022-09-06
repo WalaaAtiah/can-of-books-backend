@@ -11,18 +11,12 @@ const PORT = process.env.PORT || 3001;
 const mongoose = require('mongoose'); // 0 - import mongoose
 
 // mongoose config
-mongoose.connect('mongodb://localhost:27017/Books', {useNewUrlParser: true, useUnifiedTopology: true}); // 1 - connect mongoose with DB (books)
+mongoose.connect(`${process.env.url}`, {useNewUrlParser: true, useUnifiedTopology: true}); // 1 - connect mongoose with DB (books)
 
 let Bookmodel = require('./schema');  //file do //define the schema (structure) &compile the schem into a model
 
-
-// const Bookschema = new mongoose.Schema({ //define the schema (structure)
-//   title: String,
-//   description: String,
-//   status: String
-
-// });
-// const Bookmodel = mongoose.model('book', Bookschema); //compile the schem into a model
+// access req.body
+app.use(express.json());
 
 
 //seed data (insert initial data)
@@ -70,12 +64,37 @@ let getbooksHandler = (req,res) =>{
     }
     else
     {
-        console.log(result);
+        // console.log(result);
         res.json(result);
     }
   })
 }
+async function addbookHandler(req,res) {
+  console.log(req.body);
+  
+  const {title, description ,status} = req.body; //Destructuring assignment
+  await Bookmodel.create({
+    title : title,
+    description : description,
+    status:status
+  });
+
+  Bookmodel.find({},(err,result)=>{
+      if(err)
+      {
+          console.log(err);
+      }
+      else
+      {
+          // console.log(result);
+          res.json(result);
+      }
+  })
+}
+
 
 app.get('/books',getbooksHandler);
+app.post('/books',addbookHandler);
+
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
