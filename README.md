@@ -12,18 +12,32 @@
 **Backend side**
 
    #### lab 11 
-1- add mongoose to my server  [source!](https://mongoosejs.com/docs/)
- * npm i mongoose --save
+   1- ceate server
 
- 2- creat schema &model in other file then requiring in app.js
+  2- Create a data base
+   * add mongoose to my server  [source!](https://mongoosejs.com/docs/)
+   *  npm i mongoose --save
+   *  creat schema &model in other file then requiring in app.js
 
- 3-seed your database "insert initial data "
+   * seed your database "insert initial data "
+   *  creat books route to get the request and send the response to the user "front end" using json formate
 
- 4- creat books route to get the request and send the response to the user "front end" using json formate
- 5- use a Bootstrap carousel to render all the books returned.
+ 3- Createt the front end
+   * use a Bootstrap carousel to render all the books returned.
+   
+4- Make the server be able to send request to the data base
+Createt the front end
+5- send request to the server (get method)
 #### lab 12:
-1- add navigate between Home and About "pages".
-2- 
+1- deploy a data base by use "Mongodb Atlas" add,delete ,get data from it
+
+1- front end 
+* add navigate between Home and About "pages".
+* creat modale for adding book 
+* delete butten 
+* use post method to add book and delete method to delete it 
+3- backend 
+*  creat books route for add and another route for delete 
 
 
 ## Architecture
@@ -38,8 +52,7 @@
 the application have mongo data base with initial data.render all the books returned using slides.
 
 5/9/2022 lab 12:
-user to create a book resource in the database or delete one.
-
+The user can add a book in the database or delete it .
 
 ## Estimates
 <!-- See below -->
@@ -73,6 +86,6 @@ Estimate of time needed to complete: 10hours
 
 Start time: 8.00pm monday
 
-Finish time: 
+Finish time: 3.30am tusday
 
-Actual time needed to complete: 
+Actual time needed to complete: 10 hours
