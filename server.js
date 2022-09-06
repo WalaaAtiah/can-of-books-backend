@@ -102,7 +102,7 @@ function deleteBookHandler(req,res){
             }
             else
             {
-                // console.log(result);
+                console.log(result);
                 res.send(result);
             }
         })
@@ -110,9 +110,41 @@ function deleteBookHandler(req,res){
     })
 }
 
+function updateBooksHandler(req,res){
+  const id = req.params.id;
+    const {title,description,status} = req.body; //Destructuring assignment
+    
+    Bookmodel.findByIdAndUpdate(id,{title,description,status},(err,result)=>{
+      
+        if(err) {
+            console.log(err);
+        }
+        else {
+          console.log("befor",result)
+          Bookmodel.find({},(err,result)=>{
+                if(err)
+                {
+                    console.log(err);
+                }
+                else
+                {
+                  console.log("after",result)
+                    // console.log(result);
+                    res.send(result);
+                }
+            })
+        }
+    })
+}
+
+
+
+
+
 app.get('/books',getbooksHandler);
 app.post('/books',addbookHandler);
 app.delete('/books/:id',deleteBookHandler);
+app.put('/books/:id',updateBooksHandler);
 
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
