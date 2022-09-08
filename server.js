@@ -47,16 +47,23 @@ async function seedData(){
 
 // seedData(); //call seedData function once
 
+// http://localhost:3001/
+app.get('/', (request, response) => {
+
+  response.send('hallo from home route')
+
+})
 // http://localhost:3001/test
 app.get('/test', (request, response) => {
 
   response.send('test request received')
 
 })
-// http://localhost:3001/books
+// http://localhost:3001/books?email=email
 
 let getbooksHandler = (req,res) =>{
-  Bookmodel.find({},(err,result)=>{
+  console.log(req.query.email)
+  Bookmodel.find({email:req.query.email},(err,result)=>{
     if(err)
     {
         console.log(err);
@@ -71,14 +78,15 @@ let getbooksHandler = (req,res) =>{
 async function addbookHandler(req,res) {
   console.log(req.body);
   
-  const {title, description ,status} = req.body; //Destructuring assignment
+  const {title, description ,status,email} = req.body; //Destructuring assignment
   await Bookmodel.create({
     title : title,
     description : description,
-    status:status
+    status:status,
+    email:email
   });
 
-  Bookmodel.find({},(err,result)=>{
+  Bookmodel.find({email:email},(err,result)=>{
       if(err)
       {
           console.log(err);
@@ -92,17 +100,18 @@ async function addbookHandler(req,res) {
 }
 function deleteBookHandler(req,res){
   const bookId = req.params.id;
+
   console.log("inside delete",bookId)
     Bookmodel.deleteOne({_id:bookId},(err,result)=>{
         
-        Bookmodel.find({},(err,result)=>{
+        Bookmodel.find({email:req.query.email},(err,result)=>{
             if(err)
             {
                 console.log(err);
             }
             else
             {
-                console.log(result);
+                // console.log(result);
                 res.send(result);
             }
         })
@@ -112,7 +121,7 @@ function deleteBookHandler(req,res){
 
 function updateBooksHandler(req,res){
   const id = req.params.id;
-    const {title,description,status} = req.body; //Destructuring assignment
+    const {title,description,status,email} = req.body; //Destructuring assignment
     
     Bookmodel.findByIdAndUpdate(id,{title,description,status},(err,result)=>{
       
@@ -121,7 +130,7 @@ function updateBooksHandler(req,res){
         }
         else {
           console.log("befor",result)
-          Bookmodel.find({},(err,result)=>{
+          Bookmodel.find({email:email},(err,result)=>{
                 if(err)
                 {
                     console.log(err);
